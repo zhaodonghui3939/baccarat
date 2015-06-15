@@ -2,6 +2,7 @@ package com.game.baccarat.service.impl;
 
 import com.game.baccarat.model.BaccaratInfo;
 import com.game.baccarat.service.BaccaratService;
+import com.game.baccarat.util.CardUtil;
 
 import java.util.*;
 
@@ -19,8 +20,8 @@ public class BaccaratServiceImpl implements BaccaratService {
     public List<Integer> shuffle(){
         List list = new ArrayList();
         for(int i = 1;i <= 32; ++i) { //8副牌放入list中去
-            for (int j = 1; j <= 9; ++j) list.add(j);
-            for(int k = 10; k <= 13; ++k) list.add(0);
+            for (int j = 1; j <= 13; ++j) list.add(j);
+            //for(int k = 10; k <= 13; ++k) list.add(0);
         }
         Collections.shuffle(list);
         return list;
@@ -41,7 +42,7 @@ public class BaccaratServiceImpl implements BaccaratService {
     public List<Integer> eliminateCard(List<Integer> cards){
         if(cards.size() < 4) return new ArrayList<Integer>();
         if(cards.size() - 1 - cards.get(0) < 4) return new ArrayList<Integer>();
-        return cards.subList(1 + cards.get(0),cards.size());
+        return cards.subList(1 + CardUtil.transform(cards.get(0)),cards.size());
     }
 
     @Override
@@ -55,8 +56,8 @@ public class BaccaratServiceImpl implements BaccaratService {
     @Override
     public List<Integer> compareResult(List<Integer> player,List<Integer> banker){
         int sum1 = 0,sum2 = 0;
-        for(int i = 0; i < player.size(); ++i) sum1 = sum1 + player.get(i);
-        for(int j = 0; j < banker.size(); ++j) sum2 = sum2 + banker.get(j);
+        for(int i = 0; i < player.size(); ++i) sum1 = sum1 + CardUtil.transform(player.get(i));
+        for(int j = 0; j < banker.size(); ++j) sum2 = sum2 + CardUtil.transform(banker.get(j));
         sum1 = sum1 % 10;
         sum2 = sum2 % 10;
         int pair = 0;
@@ -79,7 +80,7 @@ public class BaccaratServiceImpl implements BaccaratService {
     private static boolean isPair(List<Integer> cards){
         List<Integer> nl = new ArrayList<>();
         for(int i = 0; i < cards.size(); ++i){
-            if(cards.get(i) != 0) nl.add(cards.get(i)); //不等于0的加入新的
+            if(CardUtil.transform(cards.get(i)) != 0) nl.add(cards.get(i)); //不等于0的加入新的
         }
         Set<Integer> s = new TreeSet<>();
         s.addAll(nl);
@@ -89,19 +90,19 @@ public class BaccaratServiceImpl implements BaccaratService {
 
     @Override
     public boolean playerOutsOrNot(List<Integer> player,List<Integer> banker){
-        if((player.get(0) + player.get(1)) % 10 >= 6) return false; //如果闲家牌点纸盒大于等于6，不补牌
-        if((banker.get(0) + banker.get(1)) % 10 >= 8) return false; //如果庄家为例牌，不补牌
+        if((CardUtil.transform(player.get(0)) + CardUtil.transform(player.get(1))) % 10 >= 6) return false; //如果闲家牌点纸盒大于等于6，不补牌
+        if((CardUtil.transform(banker.get(0)) + CardUtil.transform(banker.get(1))) % 10 >= 8) return false; //如果庄家为例牌，不补牌
         return true; //补牌
     }
 
     @Override
     public boolean bankerOutsOrNot(List<Integer> player,List<Integer> banker){
-        int bankSum = banker.get(0) + banker.get(1) % 10; //庄家牌面大小
+        int bankSum = CardUtil.transform(banker.get(0)) + CardUtil.transform(banker.get(1)) % 10; //庄家牌面大小
         if(bankSum >= 7) return false; //如果庄家两排合计7 8 9 不补牌
 
         if(player.size() == 3){//闲家补牌成功
 
-            int playAdd = player.get(2);//闲家所赠之牌
+            int playAdd = CardUtil.transform(player.get(2));//闲家所赠之牌
 
             if(bankSum == 3 && playAdd == 8) return false; //两牌合计3点，而闲家所增是8点
 
@@ -132,7 +133,7 @@ public class BaccaratServiceImpl implements BaccaratService {
                 return true;
         }
         //闲家无增派
-        if(player.get(0) + player.get(1) >= 8) return false;
+        if((CardUtil.transform(player.get(0)) + CardUtil.transform(player.get(1))) % 10 >= 8) return false;
         if(bankSum != 6 && bankSum != 7 && bankSum != 8 && bankSum != 9 && bankSum != 0 ) return true;
         if(bankSum == 6) return true;
         return true;
