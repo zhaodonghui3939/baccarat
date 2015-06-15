@@ -2,11 +2,10 @@ package com.game.baccarat.model;
 
 import java.util.List;
 public class BaccaratInfo {
-
-    private List<Integer> banker; //庄家的牌
-
     private List<Integer> player; //闲家的牌
 
+    private List<Integer> banker; //庄家的牌
+    
     private List<Integer> result; //游戏结果
 
 
