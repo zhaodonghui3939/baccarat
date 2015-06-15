@@ -3,6 +3,8 @@ package com.game.baccarat.jersey;
 import com.game.baccarat.jersey.helper.JSONHelper;
 import com.game.baccarat.manager.BaccaratManager;
 import com.game.baccarat.model.BaccaratInfo;
+import com.game.baccarat.service.BaccaratService;
+import com.game.baccarat.service.impl.BaccaratServiceImpl;
 import com.game.baccarat.util.Status;
 
 import javax.ws.rs.*;
@@ -12,6 +14,8 @@ import java.util.List;
 @Path("baccarat")
 public class Baccarat {
     BaccaratManager manager = BaccaratManager.getInstance();
+
+    BaccaratService service = BaccaratServiceImpl.getInstance();
 
     /*初始化一局游戏，返回该游戏的id*/
     @GET
@@ -68,6 +72,29 @@ public class Baccarat {
        List<BaccaratInfo> baccaratInfos = manager.getAllPastResults(id);
         if(baccaratInfos == null) return JSONHelper.getDefaultResponse(Status.AUTH_ERROR,null).toString();
         return JSONHelper.getDefaultResponse(Status.OK,baccaratInfos).toString();
+    }
+
+    //调试游戏运行过程
+    @GET
+    @Path("debug")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String debug(){
+        StringBuffer buffer = new StringBuffer();
+        List<Integer> cards = service.shuffle(); //洗盘
+        buffer.append("shuffle: "+cards.toString()+"\n");
+        List<Integer> cardsCutting = service.cutting(cards); //去除1.5倍牌
+        buffer.append("eliminate 1.5: "+cardsCutting.toString()+"\n");
+        List<Integer> cardsE = service.eliminateCard(cardsCutting); //消牌
+        buffer.append("eliminate: "+cardsE.toString()+"\n");
+        while (cardsE.size()>=6){
+            buffer.append("current cards: "+cardsE.toString()+"\n");
+            BaccaratInfo baccaratInfo = manager.playDebug(cardsE);
+
+            buffer.append("current result: "+baccaratInfo.toString()+"\n");
+        }
+
+        return buffer.toString();
+
     }
 
 }

@@ -66,6 +66,35 @@ public class BaccaratManager {
         return card;
     }
 
+    //对游戏过程进行调试
+    public BaccaratInfo playDebug(List<Integer> cards){
+        if(!baccaratservice.ifContinue(cards)) return null; //当前牌面无法支撑下一局
+        List<Integer> player = new ArrayList<>(); //闲家牌面
+        List<Integer> banker = new ArrayList<>(); //庄家牌面
+        //顺序发牌
+        player.add(cards.remove(0));
+        banker.add(cards.remove(0));
+        player.add(cards.remove(0));
+        banker.add(cards.remove(0));
+
+        if(baccaratservice.playerOutsOrNot(player,banker)){//闲家需要补牌
+            player.add(cards.remove(0));
+        }
+
+        if(baccaratservice.bankerOutsOrNot(player,banker)){//庄家需要补牌
+            banker.add(cards.remove(0));
+        }
+
+        List<Integer> result = baccaratservice.compareResult(player,banker);
+
+        BaccaratInfo baccaratInfo = new BaccaratInfo();
+        baccaratInfo.setPlayer(player);
+        baccaratInfo.setBanker(banker);
+        baccaratInfo.setResult(result);
+        return baccaratInfo;
+
+    }
+
     //开始游戏
     public BaccaratInfo play(String id){
         if(!cacheService.exitGameId(id)) return null; //如果不存在这场游戏，返回为空
