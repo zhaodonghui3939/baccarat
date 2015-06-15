@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="baccarat:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="baccarat.war">
+      <element id="artifact" artifact-name="baccarat:war exploded" />
+    </root>
+  </artifact>
+</component>
