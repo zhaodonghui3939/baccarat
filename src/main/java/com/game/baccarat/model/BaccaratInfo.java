@@ -11,7 +11,7 @@ public class BaccaratInfo {
 
 
     public String toString(){
-       return  banker.toString() + " " + player.toString() + "\n" + result.toString();
+       return  player.toString() + " " + banker.toString() + "\n" + result.toString();
     }
 
     public List<Integer> getResult() {

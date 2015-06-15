@@ -23,7 +23,7 @@ public class CacheServiceImpl implements CacheService {
         gameCards = new TreeMap<>();
         gameCompleted = new TreeMap<>();
     }
-    
+
     @Override
     public String initializeGame(){
         String id = HashUtil.getRandomId(); //生成一个房间代码
