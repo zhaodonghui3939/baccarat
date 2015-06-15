@@ -34,13 +34,6 @@ public class BaccaratManager {
         return id;
     }
 
-    public static void main(String args[]){
-        BaccaratManager m = BaccaratManager.getInstance();
-        String id = m.initialize();
-        System.out.println(m.cutting(id));
-        System.out.println(m.play(id));
-    }
-
     //这一桌前面所有游戏结果
     public List<BaccaratInfo> getAllPastResults(String id){
         if(!cacheService.exitGameId(id)) return null; //如果不存在这场游戏，返回为空
