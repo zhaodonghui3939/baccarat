@@ -83,7 +83,7 @@ public class Baccarat {
         List<Integer> cards = service.shuffle(); //洗盘
         buffer.append("shuffle: "+cards.toString()+"\n");
         List<Integer> cardsCutting = service.cutting(cards); //去除1.5倍牌
-        buffer.append("eliminate 1.5: "+cardsCutting.toString()+"\n");
+        buffer.append("eliminate cards 1.5: "+cardsCutting.toString()+"\n");
         List<Integer> cardsE = service.eliminateCard(cardsCutting); //消牌
         buffer.append("eliminate: "+cardsE.toString()+"\n");
         while (cardsE.size()>=6){
