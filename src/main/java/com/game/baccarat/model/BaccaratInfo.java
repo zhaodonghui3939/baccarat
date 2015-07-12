@@ -2,6 +2,7 @@ package com.game.baccarat.model;
 
 import java.util.List;
 public class BaccaratInfo {
+
     private List<Integer> player; //闲家的牌
 
     private List<Integer> banker; //庄家的牌
@@ -36,6 +37,5 @@ public class BaccaratInfo {
     public void setPlayer(List<Integer> player) {
         this.player = player;
     }
-
 
 }

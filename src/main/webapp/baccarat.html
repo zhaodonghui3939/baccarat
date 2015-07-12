@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Baccarat</title>
+    <style>
+    body {
+        margin: 0;
+        font-family: 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', tahoma, arial, simsun, '宋体';
+    }
+    
+    .bd {
+        position: relative;
+        width: 1366px;
+        height: 768px;
+        margin: auto;
+        border-radius: 20%;
+        background: #1d8102;
+    }
+    
+    .left,
+    .right {
+        color: #ffff00;
+        font-size: 65px;
+        font-weight: bold;
+    }
+    
+    .left {
+        left: 320px;
+    }
+    
+    .right {
+        right: 320px;
+    }
+    
+    .divider {
+        position: absolute;
+        top: 120px;
+        left: 687px;
+        width: 6px;
+        height: 220px;
+        background: #fff;
+    }
+    
+    .playercard1,
+    .playercard2,
+    .playercard3,
+    .bankercard1,
+    .bankercard2,
+    .bankercard3 {
+        z-index: 1000;
+        position: absolute;
+        width: 134px;
+        height: 200px;
+    }
+    
+    .playercard1 {
+        top: 130px;
+        left: 200px;
+    }
+    
+    .playercard2 {
+        top: 130px;
+        left: 340px;
+    }
+    
+    .playercard3 {
+        top: 130px;
+        left: 480px;
+    }
+    
+    .player {
+        position: absolute;
+        top: 170px;
+        left: 342px;
+    }
+    
+    .bankercard1 {
+        top: 130px;
+        right: 200px;
+    }
+    
+    .bankercard2 {
+        top: 130px;
+        right: 340px;
+    }
+    
+    .bankercard3 {
+        top: 130px;
+        right: 480px;
+    }
+    
+    .banker {
+        position: absolute;
+        top: 170px;
+        right: 342px;
+    }
+    
+    .start {
+        position: absolute;
+        top: 700px;
+        left: 612px;
+        background-color: #007fff;
+    }
+    
+    .start .btn-start {
+        width: 150px;
+        height: 50px;
+        padding: 0;
+        border: 4px outset #007fff;
+        background-color: #007fff;
+        color: #fff;
+        font-size: 22px;
+        font-weight: bold;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="bd">
+        <div class="left">
+            <img id="playercard1" class="playercard1" src="image/2-heart.png" alt="">
+            <img id="playercard2" class="playercard2" src="image/2-heart.png" alt="">
+            <img id="playercard3" class="playercard3" src="image/2-heart.png" alt="">
+            <span class="player">玩家</span></div>
+        <div class="divider"></div>
+        <div class="right">
+            <img id="bankercard1" class="bankercard1" src="image/2-heart.png" alt="">
+            <img id="bankercard2" class="bankercard2" src="image/2-heart.png" alt="">
+            <img id="bankercard3" class="bankercard3" src="image/2-heart.png" alt="">
+            <span class="banker">庄家</span>
+        </div>
+        <div class="start">
+            <input class="btn-start" type="button" value="开始玩牌" onclick="playGame();" />
+        </div>
+    </div>
+    <script src="../../../../../Downloads/baccarat/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+    var initUrl = 'service/baccarat/init',
+        gameId;
+
+    function initGame() {
+        $.ajax({
+            url: initUrl,
+            type: 'GET',
+            success: initGameOK
+        });
+    }
+
+    function initGameOK(res) {
+        gameId = res.data;
+        alert(gameId);
+    }
+
+    var res = {
+        status: '200',
+        time: '2015',
+        data: {
+            banker: [7, 1],
+            player: [6, 2],
+            result: [2, 0]
+        }
+    };
+
+    var images = {};
+    var cards = new Array(13);
+    for(var i=0; i<13; i++) {
+        cards[i] = [];
+    }
+
+    function initCard() {
+
+        var club, diamond, heart, spade, card=[], c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13;
+
+        for (var i = 0, j = 0; i < 14; i++) {
+            j = i + 1;
+            club = 'image/' + j + '-club.png';
+            diamond = 'image/' + j + '-diamond.png';
+            heart = 'image/' + j + '-heart.png';
+            spade = 'image/' + j + '-spade.png';
+
+            // card.push(club);
+            // card.push(diamond);
+            // card.push(heart);
+            // card.push(spade);
+
+            // cards.push(card);
+
+            cards[i].push(club);
+            cards[i].push(diamond);
+            cards[i].push(heart);
+            cards[i].push(spade);
+
+        }
+
+        c1 = cards[0];
+        c2 = cards[1];
+        c3 = cards[2];
+        c4 = cards[3];
+        c5 = cards[4];
+        c6 = cards[5];
+        c7 = cards[6];
+        c8 = cards[7];
+        c9 = cards[8];
+        c10 = cards[9];
+        c11 = cards[10];
+        c12 = cards[11];
+        c13 = cards[12];
+    }
+
+
+    function playGame() {
+        var playercard3 = res.data.player[0],
+            playercard2 = res.data.player[1],
+            playercard1 = rese.data.player[2],
+            bankercard3 = res.data.banker[0],
+            bankercard2 = res.data.banker[1],
+            bankercard1 = res.data.banker[2];
+
+    }
+
+    initCard();
+
+    // initGame();
+    </script>
+</body>
+
+</html>
