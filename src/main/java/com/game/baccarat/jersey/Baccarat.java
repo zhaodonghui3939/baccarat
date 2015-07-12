@@ -25,6 +25,14 @@ public class Baccarat {
         return JSONHelper.getDefaultResponse(Status.OK,manager.initialize()).toString();
     }
 
+    /*显示所有的房间*/
+    @GET
+    @Path("show_room")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String show(){
+        return JSONHelper.getDefaultResponse(Status.OK,manager.initialize()).toString();
+    }
+
     //消牌游戏
     @GET
     @Path("eliminate")
@@ -32,7 +40,7 @@ public class Baccarat {
     public String eliminate(
             @QueryParam("id") @DefaultValue("no-id") String id){
         int c = manager.cutting(id);
-        if(c == -1) return JSONHelper.getDefaultResponse(Status.AUTH_ERROR,"").toString();
+        if(c == -1) reurn JSONHelper.getDefaultResponse(Status.AUTH_ERROR,"").toString();
         return JSONHelper.getDefaultResponse(Status.OK,String.valueOf(manager.cutting(id))).toString();
     }
 
