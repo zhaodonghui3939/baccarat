@@ -40,7 +40,7 @@ public class Baccarat {
     public String eliminate(
             @QueryParam("id") @DefaultValue("no-id") String id){
         int c = manager.cutting(id);
-        if(c == -1) reurn JSONHelper.getDefaultResponse(Status.AUTH_ERROR,"").toString();
+        if(c == -1) return JSONHelper.getDefaultResponse(Status.AUTH_ERROR,"").toString();
         return JSONHelper.getDefaultResponse(Status.OK,String.valueOf(manager.cutting(id))).toString();
     }
 
