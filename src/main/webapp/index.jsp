@@ -1,5 +1,27 @@
-<html>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baccarat</title>
+    <style>
+        .bd {
+            background: #1d8102;
+        }
+        .divider {
+            height:300px;
+            width:80px;
+            background: #fff;
+        }
+    </style>
+</head>
 <body>
-<h2>Hello World!jhhjk</h2>
+    <div class="bd">
+        <div class="l-area"></div>
+        <div class="divider"></div>
+        <div class="right-area"></div>
+    </div>
+    
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/baccarat.js"></script>
 </body>
 </html>
