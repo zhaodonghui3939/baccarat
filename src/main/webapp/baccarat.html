@@ -5,138 +5,38 @@
     <meta charset="UTF-8">
     <title>Baccarat</title>
     <style>
-        body {
-            margin: 0;
-            font-family: 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', tahoma, arial, simsun, '宋体';
-        }
-
-        .bd {
-            position: relative;
-            width: 1366px;
-            height: 768px;
-            margin: auto;
-            border-radius: 20%;
-            background: #1d8102;
-        }
-
-        .left,
-        .right {
-            color: #ffff00;
-            font-size: 65px;
-            font-weight: bold;
-        }
-
-        .left {
-            left: 320px;
-        }
-
-        .right {
-            right: 320px;
-        }
-
-        .divider {
-            position: absolute;
-            top: 120px;
-            left: 687px;
-            width: 6px;
-            height: 220px;
-            background: #fff;
-        }
-
-        .playercard1,
-        .playercard2,
-        .playercard3,
-        .bankercard1,
-        .bankercard2,
-        .bankercard3 {
-            z-index: 1000;
-            position: absolute;
-            width: 134px;
-            height: 200px;
-        }
-
-        .playercard1 {
-            top: 130px;
-            left: 200px;
-        }
-
-        .playercard2 {
-            top: 130px;
-            left: 340px;
-        }
-
-        .playercard3 {
-            top: 130px;
-            left: 480px;
-        }
-
-        .player {
-            position: absolute;
-            top: 170px;
-            left: 342px;
-        }
-
-        .bankercard1 {
-            top: 130px;
-            right: 200px;
-        }
-
-        .bankercard2 {
-            top: 130px;
-            right: 340px;
-        }
-
-        .bankercard3 {
-            top: 130px;
-            right: 480px;
-        }
-
-        .banker {
-            position: absolute;
-            top: 170px;
-            right: 342px;
-        }
-
-        .history {
-            position: absolute;
-            top: 370px;
-            right: 100px;
-            width: 462px;
-            height: 377px;
-            background: url('image/history.png') no-repeat;
-            color: #fff;
-            font-weight: bold;
-        }
-
-        .gamenumber {
-            position: absolute;
-            top: 50px;
-            left: 60px;
-        }
-
-        .winner {
-            position: absolute;
-            top: 50px;
-            left: 180px;
-        }
-
-        .start {
-            position: absolute;
-            top: 700px;
-            left: 612px;
-            background-color: #007fff;
-        }
-
-        .start .btn-start {
-            width: 150px;
-            height: 50px;
-            padding: 0;
-            border: 4px outset #007fff;
-            background-color: #007fff;
-            color: #fff;
-            font-size: 22px;
-            font-weight: bold;
-        }
+        body { margin: 0; font-family: 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', tahoma, arial, simsun, '宋体'; }
+        .bd { position: relative; width: 1366px; height: 768px; margin: auto; border-radius: 20%; background: #1d8102; }
+        .left, .right { color: #ffff00; font-size: 65px; font-weight: bold; }
+        .left { left: 320px; }
+        .right { right: 320px; }
+        .divider { position: absolute; top: 120px; left: 687px; width: 6px; height: 220px; background: #fff;}
+        .playercard1, .playercard2, .playercard3, .bankercard1, .bankercard2, .bankercard3 { z-index: 1000; position: absolute; width: 134px; height: 200px; }
+        .playercard1 { top: 130px; left: 200px; }
+        .playercard2 { top: 130px; left: 340px; }
+        .playercard3 { top: 130px; left: 480px; }
+        .player { position: absolute; top: 170px; left: 342px; }
+        .bankercard1 { top: 130px; right: 200px; }
+        .bankercard2 { top: 130px; right: 340px; }
+        .bankercard3 { top: 130px; right: 480px; }
+        .banker { position: absolute; top: 170px; right: 342px; }
+        .history { position: absolute; top: 370px; right: 100px; width: 462px; height: 377px; background: url('image/history.png') no-repeat; color: #fff; }
+        .item, .item0, .item1, .item2, .item3, .item4, .item5, .item6, .item7, .item8, .item9{ position: absolute; top: 50px; left: 60px;}
+        .item10, .item11, .item12, .item13, .item14, .item15, .item16, .item17, .item18, .item19 { position: absolute; left: 280px;}
+        .item0, .item10 { top: 70px; }
+        .item1, .item11 { top: 90px; }
+        .item2, .item12 { top: 110px; }
+        .item3, .item13 { top: 130px; }
+        .item4, .item14 { top: 150px; }
+        .item5, .item15 { top: 170px; }
+        .item6, .item16 { top: 190px; }
+        .item7, .item17 { top: 210px; }
+        .item8, .item18 { top: 230px; }
+        .item9, .item19 { top: 250px; }
+        .gamenumber { /*position: absolute; top: 50px; left: 60px;*/ }
+        .winner { margin-left: 60px; /*position: absolute; top: 50px; left: 180px;*/}
+        .start { position: absolute; top: 700px; left: 612px; background-color: #007fff; }
+        .start .btn-start { width: 150px; height: 50px; padding: 0; border: 4px outset #007fff; background-color: #007fff; color: #fff;font-size: 22px; font-weight: bold; }
     </style>
 </head>
 
@@ -165,52 +65,24 @@
     </div>
 </div>
 <script src="js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript">
+<script src="js/baccarat.js"></script>
+<script>
     var initUrl = 'service/baccarat/init',
         playGameUrl = 'service/baccarat/play',
+        historyResultUrl = 'service/baccarat/all_result',
+        cards = new Array(13),
         gameId;
 
-    function initGame() {
-        $.ajax({
-            url: initUrl,
-            type: 'GET',
-            success: initGameOK
-        });
-    }
-
-    function initGameOK(res) {
-        gameId = {id: res.data};
-    }
-
-    initGame();
-
-    function playGame() {
-        $.ajax({
-            url: playGameUrl,
-            type: 'GET',
-            data: gameId,
-            success: playGameOK
-        });
-    }
-
-    var res = {
-        status: '200',
-        time: '2015',
-        data: {
-            banker: [7, 1, 1],
-            player: [6, 2],
-            result: [2, 0]
-        }
-    };
-
-    var cards = new Array(13);
-    for (var i = 0; i < 13; i++) {
-        cards[i] = [];
-    }
-
+    /**
+     * 初始化卡牌
+     * @return {[type]} [description]
+     */
     function initCard() {
-
         var club, diamond, heart, spade;
+
+        for (var i = 0; i < 13; i++) {
+            cards[i] = [];
+        }
 
         for (var i = 0, j = 0; i < 13; i++) {
             j = i + 1;
@@ -225,6 +97,34 @@
             cards[i].push(spade);
         }
     }
+
+    /**
+     * 初始牌局
+     * @return {[type]} [description]
+     */
+    function initGame() {
+        $.ajax({
+            url: initUrl,
+            type: 'GET',
+            success: initGameOK
+        });
+    }
+
+    function initGameOK(res) {
+        gameId = {id: res.data};
+    }
+
+    /**
+     * 玩牌
+     */
+    function playGame() {
+        $.ajax({
+            url: playGameUrl,
+            type: 'GET',
+            data: gameId,
+            success: playGameOK
+        });
+    }  
 
     function playGameOK(res) {
         var players = res.data.player,
@@ -251,6 +151,12 @@
         setTimeout(calculateRes(players, bankers), 10000);
     }
 
+    /**
+     * 显示单局玩牌结果
+     * @param  {[string]} player [玩家点数]
+     * @param  {[string]} banker [庄家点数]
+     * @return {[type]}        [description]
+     */
     function calculateRes(player, banker) {
         var playerres = 0,
                 bankerres = 0;
@@ -266,7 +172,6 @@
                 bankerres += banker[j];
             }
         }
-
         if (playerres > 20) {
             playerres = playerres - 20;
         } else if (playerres > 10) {
@@ -286,10 +191,66 @@
         } else {
             alert('玩家点数' + playerres + ',' + '庄家点数' + bankerres + ', 平局');
         }
+
+        getHistoryResults();
+    }
+
+    /**
+     * 显示玩牌历史结果
+     */
+    function getHistoryResults() {
+        $.ajax({
+            url: historyResultUrl,
+            type: 'GET',
+            data: gameId,
+            success: showHistoryResults
+        });
+    }
+
+    function showHistoryResults(res) {
+        var history = res.data,
+            results = [],
+            result, gameTxt;
+        var item = document.createElement('div'),
+            number = document.createElement('span'),
+            winner = document.createElement('span');
+
+        $('#history').empty();
+
+        for(var i=0; i<history.length; i++) {
+            result = history[i].result[0];
+            results.push(result);
+        }
+
+        for(var i=0; i<results.length; i++) {
+            item = document.createElement('div'),
+            number = document.createElement('span'),
+            winner = document.createElement('span');
+
+            item.className = 'item' + i;
+            number.className = 'gamenumber';
+            winner.className = 'winner';
+
+            if(results[i] === 0) {
+                gameTxt = '玩家';
+            } else if(results[i] === 1) {
+                gameTxt = '庄家';
+            } else {
+                gameTxt = '平';
+            }
+
+            winner.innerText = gameTxt;
+            number.innerText = i + 1;
+
+            item.appendChild(number);
+            item.appendChild(winner);
+            $('#history').append(item);
+        }
+
     }
 
     initCard();
-
+    initGame();
 
 </script>
 </body>
