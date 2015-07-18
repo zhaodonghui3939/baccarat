@@ -15,27 +15,16 @@
         .playercard1 { top: 130px; left: 200px; }
         .playercard2 { top: 130px; left: 340px; }
         .playercard3 { top: 130px; left: 480px; }
-        .player { position: absolute; top: 170px; left: 342px; }
+        .player { position: absolute; top: 30px; left: 342px; }
         .bankercard1 { top: 130px; right: 200px; }
         .bankercard2 { top: 130px; right: 340px; }
         .bankercard3 { top: 130px; right: 480px; }
-        .banker { position: absolute; top: 170px; right: 342px; }
-        .history { position: absolute; top: 370px; right: 100px; width: 462px; height: 377px; background: url('image/history.png') no-repeat; color: #fff; }
-        .item, .item0, .item1, .item2, .item3, .item4, .item5, .item6, .item7, .item8, .item9{ position: absolute; top: 50px; left: 60px;}
-        .item10, .item11, .item12, .item13, .item14, .item15, .item16, .item17, .item18, .item19 { position: absolute; left: 280px;}
-        .item0, .item10 { top: 70px; }
-        .item1, .item11 { top: 90px; }
-        .item2, .item12 { top: 110px; }
-        .item3, .item13 { top: 130px; }
-        .item4, .item14 { top: 150px; }
-        .item5, .item15 { top: 170px; }
-        .item6, .item16 { top: 190px; }
-        .item7, .item17 { top: 210px; }
-        .item8, .item18 { top: 230px; }
-        .item9, .item19 { top: 250px; }
-        .gamenumber { /*position: absolute; top: 50px; left: 60px;*/ }
-        .winner { margin-left: 60px; /*position: absolute; top: 50px; left: 180px;*/}
-        .start { position: absolute; top: 700px; left: 612px; background-color: #007fff; }
+        .banker { position: absolute; top: 30px; right: 342px; }
+        .gameRes { position: absolute; top: 500px; left: 555px; color: #fff; font-size: 21px; letter-spacing: 3px;}
+        .history { position: absolute; top: 700px; left: 170px; color: #fff; font-size: 16px; }
+        .history span:first-child { color: #ffff00; }
+        .winner { margin-left: 20px; }
+        .start { position: absolute; top: 630px; left: 612px; background-color: #007fff; }
         .start .btn-start { width: 150px; height: 50px; padding: 0; border: 4px outset #007fff; background-color: #007fff; color: #fff;font-size: 22px; font-weight: bold; }
     </style>
 </head>
@@ -54,12 +43,8 @@
         <img id="bankercard3" class="bankercard3" src="image/cardback.jpg" alt="">
         <span class="banker">庄家</span>
     </div>
-    <div id="history" class="history">
-        <div class="item">
-            <span id="gamenumber" class="gamenumber">局数</span>
-            <span id="winner" class="winner">赢家</span>
-        </div>
-    </div>
+    <div class="gameRes" id="gameRes"></div>
+    <div class="history" id="history"></div>
     <div class="start">
         <input class="btn-start" type="button" value="开始玩牌" onclick="playGame();" />
     </div>
@@ -69,7 +54,7 @@
 <script>
     var initUrl = 'service/baccarat/init',
         playGameUrl = 'service/baccarat/play',
-        historyResultUrl = 'service/baccarat/all_result',
+        historyResultUrl = 'service/baccarat/latest_result_n',
         cards = new Array(13),
         gameId;
 
@@ -99,6 +84,21 @@
     }
 
     /**
+     * 恢复卡牌状态
+     * @return {[type]} [description]
+     */
+    function resetCard() {
+        $('#playercard1').show();
+        $('#bankercard1').show();
+        $('#playercard1').attr('src', 'image/cardback.jpg');
+        $('#playercard2').attr('src', 'image/cardback.jpg');
+        $('#playercard3').attr('src', 'image/cardback.jpg');
+        $('#bankercard1').attr('src', 'image/cardback.jpg');
+        $('#bankercard2').attr('src', 'image/cardback.jpg');
+        $('#bankercard3').attr('src', 'image/cardback.jpg');
+    }
+
+    /**
      * 初始牌局
      * @return {[type]} [description]
      */
@@ -118,6 +118,7 @@
      * 玩牌
      */
     function playGame() {
+        resetCard();
         $.ajax({
             url: playGameUrl,
             type: 'GET',
@@ -136,19 +137,23 @@
                 bankercard2 = bankers[1],
                 bankercard1 = bankers[2];
 
-        $('#playercard3')[0].src = cards[playercard3 - 1][Math.round((Math.random()) * 3)];
-        $('#playercard2')[0].src = cards[playercard2 - 1][Math.round((Math.random()) * 3)];
+        $('#playercard3').attr('src', cards[playercard3 - 1][Math.round((Math.random()) * 3)]);
+        $('#playercard2').attr('src', cards[playercard2 - 1][Math.round((Math.random()) * 3)]);
         if (playercard1 != undefined) {
-            $('#playercard1')[0].src = cards[playercard1 - 1][Math.round((Math.random()) * 3)];
+            $('#playercard1').attr('src', cards[playercard1 - 1][Math.round((Math.random()) * 3)]);
+        } else {
+            $('#playercard1').hide();
         }
 
-        $('#bankercard3')[0].src = cards[bankercard3 - 1][Math.round((Math.random()) * 3)];
-        $('#bankercard2')[0].src = cards[bankercard2 - 1][Math.round((Math.random()) * 3)];
+        $('#bankercard3').attr('src', cards[bankercard3 - 1][Math.round((Math.random()) * 3)]);
+        $('#bankercard2').attr('src', cards[bankercard2 - 1][Math.round((Math.random()) * 3)]);
         if (bankercard1 != undefined) {
-            $('#bankercard1')[0].src = cards[bankercard1 - 1][Math.round((Math.random()) * 3)];
+            $('#bankercard1').attr('src', cards[bankercard1 - 1][Math.round((Math.random()) * 3)]);
+        } else {
+            $('#bankercard1').hide();
         }
 
-        setTimeout(calculateRes(players, bankers), 10000);
+        calculateRes(players, bankers);
     }
 
     /**
@@ -158,39 +163,39 @@
      * @return {[type]}        [description]
      */
     function calculateRes(player, banker) {
-        var playerres = 0,
-                bankerres = 0;
+        var playerres = 0, bankerres = 0, gameRes;
 
         for (var i = 0; i < player.length; i++) {
             if (player[i] < 10) {
                 playerres += player[i];
             }
         }
-
         for (var j = 0; j < player.length; j++) {
             if (banker[j] < 10) {
                 bankerres += banker[j];
             }
         }
-        if (playerres > 20) {
+
+        if (playerres >= 20) {
             playerres = playerres - 20;
-        } else if (playerres > 10) {
+        } else if (playerres >= 10) {
             playerres = playerres - 10;
         }
-
-        if (bankerres > 20) {
+        if (bankerres >= 20) {
             bankerres = bankerres - 20;
-        } else if (bankerres > 10) {
+        } else if (bankerres >= 10) {
             bankerres = bankerres - 10;
         }
 
         if (playerres > bankerres) {
-            alert('玩家点数' + playerres + ',' + '庄家点数' + bankerres + ', 玩家赢');
+            gameRes = '玩家点数' + playerres + ',' + '庄家点数' + bankerres + ', 玩家赢';
         } else if (playerres < bankerres) {
-            alert('玩家点数' + playerres + ',' + '庄家点数' + bankerres + ', 庄家赢');
+            gameRes = '玩家点数' + playerres + ',' + '庄家点数' + bankerres + ', 庄家赢';
         } else {
-            alert('玩家点数' + playerres + ',' + '庄家点数' + bankerres + ', 平局');
+            gameRes = '玩家点数' + playerres + ',' + '庄家点数' + bankerres + ', 平局';
         }
+
+        $('#gameRes').html(gameRes);
 
         getHistoryResults();
     }
@@ -199,10 +204,14 @@
      * 显示玩牌历史结果
      */
     function getHistoryResults() {
+        var param = {
+            id: gameId.id,
+            n: 20
+        };
         $.ajax({
             url: historyResultUrl,
             type: 'GET',
-            data: gameId,
+            data: param,
             success: showHistoryResults
         });
     }
@@ -211,24 +220,17 @@
         var history = res.data,
             results = [],
             result, gameTxt;
-        var item = document.createElement('div'),
-            number = document.createElement('span'),
-            winner = document.createElement('span');
+        var winner = document.createElement('span');
 
         $('#history').empty();
 
-        for(var i=0; i<history.length; i++) {
+        for(var i=history.length-1; i>=0; i--) {
             result = history[i].result[0];
             results.push(result);
         }
 
         for(var i=0; i<results.length; i++) {
-            item = document.createElement('div'),
-            number = document.createElement('span'),
             winner = document.createElement('span');
-
-            item.className = 'item' + i;
-            number.className = 'gamenumber';
             winner.className = 'winner';
 
             if(results[i] === 0) {
@@ -240,11 +242,7 @@
             }
 
             winner.innerText = gameTxt;
-            number.innerText = i + 1;
-
-            item.appendChild(number);
-            item.appendChild(winner);
-            $('#history').append(item);
+            $('#history').append(winner);
         }
 
     }
