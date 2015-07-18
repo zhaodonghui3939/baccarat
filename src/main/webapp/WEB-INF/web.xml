@@ -18,6 +18,6 @@
         <url-pattern>/service/*</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>baccarat.html</welcome-file>
     </welcome-file-list>
 </web-app>
