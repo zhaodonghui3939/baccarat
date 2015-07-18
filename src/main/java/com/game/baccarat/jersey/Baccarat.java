@@ -72,12 +72,13 @@ public class Baccarat {
 
     //过去所有的结果
     @GET
-    @Path("all_result")
+    @Path("latest_result_n")
     @Produces(MediaType.APPLICATION_JSON)
     public String all(
-            @QueryParam("id") @DefaultValue("no-id") String id){
+            @QueryParam("id") @DefaultValue("no-id") String id,
+            @QueryParam("id") @DefaultValue("no-id") String n){
 
-       List<BaccaratInfo> baccaratInfos = manager.getAllPastResults(id);
+       List<BaccaratInfo> baccaratInfos = manager.getPastNResults(id,Integer.parseInt(n));
         if(baccaratInfos == null) return JSONHelper.getDefaultResponse(Status.AUTH_ERROR,null).toString();
         return JSONHelper.getDefaultResponse(Status.OK,baccaratInfos).toString();
     }

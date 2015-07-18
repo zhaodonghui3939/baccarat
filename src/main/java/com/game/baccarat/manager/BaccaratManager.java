@@ -41,6 +41,13 @@ public class BaccaratManager {
         return baccaratInfos;
     }
 
+    //这一桌最近n局结果
+    public List<BaccaratInfo> getPastNResults(String id,int n){
+        if(!cacheService.exitGameId(id)) return null; //如果不存在这场游戏，返回为空
+        List<BaccaratInfo> baccaratInfos = cacheService.getPastNResultById(id,n);
+        return baccaratInfos;
+    }
+
     //这一桌最近上局的结果
     public BaccaratInfo getLatestResult(String id){
         if(!cacheService.exitGameId(id)) return null; //如果不存在这场游戏，返回为空

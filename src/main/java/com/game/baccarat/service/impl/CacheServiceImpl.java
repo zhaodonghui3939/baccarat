@@ -4,9 +4,7 @@ import com.game.baccarat.model.BaccaratInfo;
 import com.game.baccarat.service.CacheService;
 import com.game.baccarat.util.HashUtil;
 
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class CacheServiceImpl implements CacheService {
 
@@ -49,6 +47,15 @@ public class CacheServiceImpl implements CacheService {
         return null;
     }
     @Override
+    public List<BaccaratInfo> getPastNResultById(String id,int n){
+        if(gameCompleted.containsKey(id)){
+            List<BaccaratInfo> re =  gameCompleted.get(id);
+            if(re.size() < n) return re;
+            return re.subList(re.size()  - n ,re.size());
+        }
+        return null;
+    }
+    @Override
     public boolean emptyCardsByID(String id){
         if(gameCards.containsKey(id)) {
             gameCards.remove(id);
@@ -81,5 +88,14 @@ public class CacheServiceImpl implements CacheService {
             return true;
         }
         return false;
+    }
+    public static void main(String[] args){
+        List<Integer> a = new ArrayList<>();
+        a.add(1);
+        a.add(2);
+        a.add(3);
+        a.add(4);
+        System.out.println(a.subList(4-3,4));
+
     }
 }

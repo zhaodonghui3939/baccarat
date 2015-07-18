@@ -14,6 +14,8 @@ public interface CacheService {
 
     public List<BaccaratInfo> getPastResultById(String id); //获取某个房间过去的结果
 
+    public List<BaccaratInfo> getPastNResultById(String id,int n); //获取某个房间过去n局游戏的结果
+
     public boolean emptyCardsByID(String id); //清空某个房间的牌面信息
 
     public boolean emptyResultById(String id); //清空某个房间过去的结果
