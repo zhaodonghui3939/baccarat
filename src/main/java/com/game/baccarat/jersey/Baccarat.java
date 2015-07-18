@@ -76,7 +76,7 @@ public class Baccarat {
     @Produces(MediaType.APPLICATION_JSON)
     public String all(
             @QueryParam("id") @DefaultValue("no-id") String id,
-            @QueryParam("id") @DefaultValue("no-id") String n){
+            @QueryParam("n") @DefaultValue("0") String n){
 
        List<BaccaratInfo> baccaratInfos = manager.getPastNResults(id,Integer.parseInt(n));
         if(baccaratInfos == null) return JSONHelper.getDefaultResponse(Status.AUTH_ERROR,null).toString();
