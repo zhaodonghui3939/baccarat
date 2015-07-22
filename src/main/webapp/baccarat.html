@@ -52,9 +52,9 @@
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/baccarat.js"></script>
 <script>
-    var initUrl = 'service/baccarat/init?t=' + new Date().getTime(),
-        playGameUrl = 'service/baccarat/play?t=' + new Date().getTime(),
-        historyResultUrl = 'service/baccarat/latest_result_n?t=' + new Date().getTime(),
+    var initUrl = 'service/baccarat/init',
+        playGameUrl = 'service/baccarat/play',
+        historyResultUrl = 'service/baccarat/latest_result_n',
         cards = new Array(13),
         gameId;
 
@@ -104,7 +104,7 @@
      */
     function initGame() {
         $.ajax({
-            url: initUrl,
+            url: initUrl + '?t=' + new Date().getTime(),
             type: 'GET',
             success: initGameOK
         });
@@ -120,7 +120,7 @@
     function playGame() {
         resetCard();
         $.ajax({
-            url: playGameUrl,
+            url: playGameUrl + '?t=' + new Date().getTime(),
             type: 'GET',
             data: gameId,
             success: playGameOK
@@ -209,7 +209,7 @@
             n: 20
         };
         $.ajax({
-            url: historyResultUrl,
+            url: historyResultUrl + '?t=' + new Date().getTime(),
             type: 'GET',
             data: param,
             success: showHistoryResults
