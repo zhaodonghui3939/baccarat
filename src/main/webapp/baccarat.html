@@ -104,8 +104,9 @@
      */
     function initGame() {
         $.ajax({
-            url: initUrl + '?t=' + new Date().getTime(),
+            url: initUrl + '?_=' + new Date().getTime(),
             type: 'GET',
+            cache: false,
             success: initGameOK
         });
     }
@@ -120,12 +121,13 @@
     function playGame() {
         var param = {
             id: gameId.id,
-            t: new Date().getTime()
+            _: new Date().getTime()
         };
         resetCard();
         $.ajax({
             url: playGameUrl,
             type: 'GET',
+            cache: false,
             data: param,
             success: playGameOK
         });
@@ -211,11 +213,12 @@
         var param = {
             id: gameId.id,
             n: 20,
-            t: new Date().getTime()
+            _: new Date().getTime()
         };
         $.ajax({
             url: historyResultUrl,
             type: 'GET',
+            cache: false,
             data: param,
             success: showHistoryResults
         });
