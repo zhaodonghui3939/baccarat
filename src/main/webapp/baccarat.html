@@ -118,11 +118,15 @@
      * 玩牌
      */
     function playGame() {
+        var param = {
+            id: gameId.id,
+            t: new Date().getTime()
+        };
         resetCard();
         $.ajax({
-            url: playGameUrl + '?t=' + new Date().getTime(),
+            url: playGameUrl,
             type: 'GET',
-            data: gameId,
+            data: param,
             success: playGameOK
         });
     }  
@@ -206,10 +210,11 @@
     function getHistoryResults() {
         var param = {
             id: gameId.id,
-            n: 20
+            n: 20,
+            t: new Date().getTime()
         };
         $.ajax({
-            url: historyResultUrl + '?t=' + new Date().getTime(),
+            url: historyResultUrl,
             type: 'GET',
             data: param,
             success: showHistoryResults
