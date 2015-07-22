@@ -52,9 +52,9 @@
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/baccarat.js"></script>
 <script>
-    var initUrl = 'service/baccarat/init',
-        playGameUrl = 'service/baccarat/play',
-        historyResultUrl = 'service/baccarat/latest_result_n',
+    var initUrl = 'service/baccarat/init?t=' + new Date().getTime(),
+        playGameUrl = 'service/baccarat/play?t=' + new Date().getTime(),
+        historyResultUrl = 'service/baccarat/latest_result_n?t=' + new Date().getTime(),
         cards = new Array(13),
         gameId;
 
@@ -63,13 +63,13 @@
      * @return {[type]} [description]
      */
     function initCard() {
-        var club, diamond, heart, spade;
+        var club, diamond, heart, spade, i, j;
 
-        for (var i = 0; i < 13; i++) {
+        for (i = 0; i < 13; i++) {
             cards[i] = [];
         }
 
-        for (var i = 0, j = 0; i < 13; i++) {
+        for (i = 0, j = 0; i < 13; i++) {
             j = i + 1;
             club = 'image/' + j + '-club.png';
             diamond = 'image/' + j + '-diamond.png';
@@ -241,7 +241,7 @@
                 gameTxt = '平';
             }
 
-            winner.innerText = gameTxt;
+            winner.innerHTML = gameTxt;
             $('#history').append(winner);
         }
 
